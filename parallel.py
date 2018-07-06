@@ -1,7 +1,5 @@
-import plotly.plotly as py
 import plotly.graph_objs as go
 import plotly.offline as offline
-import numpy as np
 import pandas as pd
 from sklearn.datasets import load_iris
 
@@ -25,10 +23,13 @@ class ParallelCoordinates(object):
     def set_title(self, s):
         self.title = s
 
+    def set_filename(self, s):
+        self.filename = s
+
     def plot(self):
         layout = go.Layout(title=self.title)
         fig = go.Figure(data=self.traces, layout=layout)
-        file_html = self.filename + 'plot.html'
+        file_html = self.filename + '.html'
         offline.plot(fig, filename=file_html, image='png', image_filename=self.filename)
         # offline.iplot(fig)
 
@@ -41,4 +42,5 @@ p = ParallelCoordinates()
 p.add_trace(df)
 
 p.set_title('iris')
+p.set_filename('iris_parallel')
 p.plot()
